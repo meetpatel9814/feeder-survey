@@ -1,0 +1,120 @@
+<div class="row justify-content-start pb-3">
+    <div class="row justify-content-start">
+        <div class="col-auto">
+            <button type="submit" class="form-control btn btn-outline-primary rounded submit px-3" routerLink="/home"
+                routerLinkActive="active" ariaCurrentWhenActive="page">Back</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="card rounded">
+    <div class="login-wrap p-4 p-md-5 card-body">
+      <div class="d-flex">
+        <div class="w-100">
+          <h3 class="mb-4">Add Fidder</h3>
+        </div>
+      </div>
+      <form (ngSubmit)="saveFidderDetails()" #fidderForm="ngForm">
+
+        <div class="form-group py-1">
+            <label for="substationName">Substation</label>
+            <select class="form-control"  id="substationName"
+                    required
+                    [(ngModel)]="fidder.substationId" name="substationName" (ngModelChange)="substationSelect($event)">
+              <option *ngFor="let substation of substationList" [value]="substation.id">{{substation.name}}</option>
+            </select>
+          </div>
+
+        <div class="form-group py-1">
+            <label for="fidderName">Fidder Name</label>
+            <select class="form-control"  id="fidderName"
+                    required
+                    [(ngModel)]="fidder.feederId" name="fidderName">
+              <option *ngFor="let item of feederList" [value]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group py-1">
+            <label for="transformerLocationName">Transformer Location</label>
+            <input type="text" class="form-control" id="transformerLocationName"
+                   required
+                   [(ngModel)]="fidder.transformerLocationName" name="transformerLocationName">
+          </div>
+          <div class="form-group py-1">
+            <label for="existingTcCapacity">Existing TC Capacity</label>
+            <select class="form-control"  id="existingTcCapacity"
+                    required
+                    [(ngModel)]="fidder.existingTcCapacity" name="existingTcCapacity">
+              <option *ngFor="let item of existingTcCapacityList" [value]="item">{{item}}</option>
+            </select>
+          </div>
+          <div class="form-group py-1">
+            <label for="proposeTcCapacity">Propose TC Capacity</label>
+            <select class="form-control"  id="proposeTcCapacity"
+                    required
+                    [(ngModel)]="fidder.proposeTcCapacity" name="proposeTcCapacity">
+              <option *ngFor="let item of proposeTcCapacityList" [value]="item">{{item}}</option>
+            </select>
+          </div>
+          <div class="form-group py-1">
+            <label for="proposeRMUType">Propose RMU Type</label>
+            <select class="form-control"  id="proposeRMUType"
+                    required
+                    [(ngModel)]="fidder.proposeRMUType" name="proposeRMUType">
+              <option *ngFor="let item of proposeRMUTypeList" [value]="item">{{item}}</option>
+            </select>
+          </div>
+
+          
+          
+          <div class="form-group py-1"><label for="status">Fidder Location</label></div>
+
+          <div class="row">
+            <div class="col">
+                <div class="form-group py-1">
+                    <label for="latitude">Latitude</label>
+                    <input type="text"  class="form-control" id="latitude"
+                    [(ngModel)]="fidder.latitude" name="latitude">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group py-1">
+
+                    <label for="longitude">Longitude</label>
+                   
+                    <input type="text"  class="form-control" id="longitude"
+                    [(ngModel)]="fidder.longitude" name="longitude">
+                  </div>
+            </div>
+            
+          
+        </div>
+        <div class="row py-2">
+            <div class="col">
+                <div *ngIf="apiLoaded | async">
+                    <google-map [options]="options" height="400px" width="320px" (mapClick)="addMarker($event)" >
+                        <map-marker *ngFor="let location of markerPositions" [options]="markerOptions"></map-marker>
+                        <map-info-window>Info Window content</map-info-window>
+                    </google-map>
+                  </div>
+
+            </div>
+        
+          </div>
+
+          <div class="form-group py-2">
+            <label for="remarks">Remarks</label>
+            <input type="text" class="form-control" id="remarks"
+                   required
+                   [(ngModel)]="fidder.remarks" name="remarks">
+          </div>
+
+          <div class="form-group py-4">
+            <button type="submit" class="form-control btn btn-outline-primary rounded submit px-3" ariaCurrentWhenActive="page">Save</button>
+          </div>
+
+        </form>
+        
+    </div>
+  </div>

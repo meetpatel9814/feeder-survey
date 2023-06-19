@@ -1,0 +1,10 @@
+{
+    "status": "success",
+    "code" : 200,
+    "message" : "data fetch Successfully",
+    "content" : {
+        "existingTcCapacityList" : [16,25,50,63,100,200,315,500],
+        "proposeTcCapacityList" : [16,25,50,63,100,200,315,500],
+        "proposeRMUTypeList" : ["CC-2 WAY","CCV-3 WAY","CCC-3 WAY","CCVV-4 WAY","CCCV-4 WAY","CCCVV-5 WAY","CCCC-4 WAY"]
+    }
+}

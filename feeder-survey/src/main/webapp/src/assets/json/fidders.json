@@ -1,0 +1,6 @@
+{
+    "status": "success",
+    "code" : 200,
+    "message" : "data fetched sucessfully",
+    "content": [{"id": 1, "name": "F1"}, {"id": 2, "name": "F2"}, {"id": 3, "name": "F3"}, {"id": 4, "name": "F4"}]
+}

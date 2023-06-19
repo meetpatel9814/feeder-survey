@@ -1,0 +1,7 @@
+npm install @angular/cli 
+npm install bootstrap
+npm install @angular/google-maps
+ng add @ng-bootstrap/ng-bootstrap
+
+## build
+ng build --base-href feeder-survey

@@ -1,0 +1,26 @@
+<div class="row justify-content-start pb-3">
+    <div class="row justify-content-start">
+        <div class="col-auto">
+            <button type="submit" class="form-control btn btn-outline-primary rounded submit px-3" routerLink="/home"
+                routerLinkActive="active" ariaCurrentWhenActive="page">Back</button>
+        </div>
+    </div>
+</div>
+
+<div class="card rounded py-4 px-1">
+    <div class="row p-4">
+        <div class="col">
+            {{this.selectedFidderId}}
+        </div>
+        <div class="col">
+            Sargasan Fidder
+        </div>
+    </div>
+    <div *ngIf="apiLoaded | async">
+        <google-map [options]="options" height="400px" width="350px" (mapClick)="addMarker($event)">
+            <map-marker *ngFor="let location of markerPositions"
+            [options]="markerOptions"></map-marker>
+        </google-map>
+      </div>
+
+</div>

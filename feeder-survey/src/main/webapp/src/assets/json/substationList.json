@@ -1,0 +1,10 @@
+{
+    "status": "success",
+    "code" : 200,
+    "message" : "data fetch Successfully",
+    "content" : [
+        {"id": 1 , "name": "Vijapur", "fidderList": [{"id": 1, "name": "F1"}, {"id": 2, "name": "F2"}]},
+        {"id": 2 , "name": "Anandpura", "fidderList": [{"id": 1, "name": "F1"}, {"id": 4, "name": "F4"}]}, 
+        {"id": 3 , "name": "Falu", "fidderList": [{"id": 3, "name": "F3"}, {"id": 4, "name": "F4"}]}
+    ]
+}

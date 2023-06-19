@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCwndKAMIGbrVlnwbSN5DApnyL1yYoEg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+   <style>
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+ #map {
+  height: 100%;
+  width: 500px;
+}
+
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+   </style> 
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- 
+    <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyAOCwndKAMIGbrVlnwbSN5DApnyL1yYoEg", v: "weekly"});</script> -->
+            <script>
+                let map, infoWindow;
+var locations = [
+    ['Los Angeles', 34.052235, -118.243683],
+    ['Santa Monica', 34.024212, -118.496475],
+    ['Redondo Beach', 33.849182, -118.388405],
+    ['Newport Beach', 33.628342, -117.927933],
+    ['Long Beach', 33.770050, -118.193739]
+  ];
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: locations[0][1], lng: locations[0][2] },
+    zoom: 10,
+  });
+  infoWindow = new google.maps.InfoWindow();
+
+  const locationButton = document.createElement("button");
+  for (count = 0; count < locations.length; count++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+      map: map,
+      title: locations[count][0]
+    });
+    google.maps.event.addListener(marker, 'click', (function (marker, count) {
+      return function () {
+        infoWindow.setContent(locations[count][0]);
+        infoWindow.open(map, marker);
+      }
+    })(marker, count));
+  }
+
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
+
+  google.maps.event.addDomListener(map, 'click', function(event) {
+    var myLatLng = event.latLng;
+    var lat = myLatLng.lat();
+    var lng = myLatLng.lng();
+    alert( 'lat '+ lat + ' lng ' + lng ); 
+
+});
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
+
+
+
+
+
+window.initMap = initMap;
+
+
+
+
+                    </script>
+  </body>
+</html>

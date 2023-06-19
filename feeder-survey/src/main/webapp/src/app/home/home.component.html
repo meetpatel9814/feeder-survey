@@ -1,0 +1,156 @@
+<div>
+    <div class="justify-content-between pb-3">
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="form-control btn btn-outline-primary rounded px-3" routerLink="/add-fidder"
+                    routerLinkActive="active" ariaCurrentWhenActive="page">Add Fidder</button>
+            </div>
+            <div class="col">
+                <button type="button"
+                    class="form-control btn btn-outline-primary rounded px-3" 
+                    (click)="collapse.toggle()" 
+                    [attr.aria-expanded]="!filterSection"
+              aria-controls="collapseExample">
+              Filter
+            </button>
+            </div>
+        </div>
+            
+          <div class="py-2" #collapse="ngbCollapse" [(ngbCollapse)]="filterSection">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="substationName">Substation</label>
+                            <select class="form-control"  id="substationName"
+                                    required
+                                    [(ngModel)]="fidder.substationId" name="substationName">
+                              <option *ngFor="let substation of substationList" [value]="substation.id">{{substation.name}}</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="fidderName">Fidder Name</label>
+                            <select class="form-control"  id="fidderName"
+                                    required
+                                    [(ngModel)]="fidder.feederId" name="fidderName">
+                              <option *ngFor="let item of fidderFilterList" [value]="item.id">{{item.name}}</option>
+                            </select>
+                          </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="transformerLocationName">Transformer Location</label>
+                            <input type="text" class="form-control" id="transformerLocationName"
+                                   required
+                                   [(ngModel)]="fidder.transformerLocationName" name="transformerLocationName">
+                          </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="existingTcCapacity">Existing TC Capacity</label>
+                            <select class="form-control"  id="existingTcCapacity"
+                                    required
+                                    [(ngModel)]="fidder.existingTcCapacity" name="existingTcCapacity">
+                              <option *ngFor="let item of existingTcCapacityList" [value]="item">{{item}}</option>
+                            </select>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="proposeTcCapacity">Propose TC Capacity</label>
+                            <select class="form-control"  id="proposeTcCapacity"
+                                    required
+                                    [(ngModel)]="fidder.proposeTcCapacity" name="proposeTcCapacity">
+                              <option *ngFor="let item of proposeTcCapacityList" [value]="item">{{item}}</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <label for="proposeRMUType">Propose RMU Type</label>
+                            <select class="form-control"  id="proposeRMUType"
+                                    required
+                                    [(ngModel)]="fidder.proposeRMUType" name="proposeRMUType">
+                              <option *ngFor="let item of proposeRMUTypeList" [value]="item">{{item}}</option>
+                            </select>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group py-1">
+                            <button type="submit" class="form-control btn btn-outline-primary rounded px-3" (click)="fetchFidderDetailsWithSection();">Filter Data</button>
+                          </div>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+    </div>
+
+    
+
+
+      
+
+
+    <div class="card rounded py-4 px-1 overflow-auto">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Substation</th>
+                            <th scope="col">Feeder-name</th>
+                            <th scope="col">Transformer Location</th>
+                            <th scope="col">Existing TC Capacity</th>
+                            <th scope="col">Propose TC Capacity</th>
+                            <th scope="col">Propose RMU Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of fidderList" (click)="openFidderViewScreen(item)">
+                            <th scope="row">{{item.substationName}}</th>
+                            <td>{{item.feederName}}</td>
+                            <td>{{item.transformerLocationName}}</td>
+                            <td>{{item.existingTcCapacity}}</td>
+                            <td>{{item.proposeTcCapacity}}</td>
+                            <td>{{item.proposeRMUType}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row p-3">
+        
+        <div class="col">
+            <button type="button" class="form-control btn btn-outline-secondary submit px-3" (click)="showMapView()">Show in Map</button>
+        </div>
+    
+    </div>
+
+
+    <div class="row p-3">
+        
+            <div class="col">
+                <button type="button" class="form-control btn btn-outline-secondary submit px-3" (click)="logout()">Log out</button>
+            </div>
+        
+    </div>
+
+</div>

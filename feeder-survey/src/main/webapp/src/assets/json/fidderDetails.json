@@ -1,0 +1,9 @@
+{
+    "status": "success",
+    "code" : 200,
+    "message" : "data fetch Successfully",
+    "content" : [
+        {"id": 1, "fidderName" :"F1", "substationName": "Vijapur", "transformerLocationName": "UGVCL","existingTcCapacity":"16","proposeTcCapacity":"25","proposeRMUType":"CCV-3 WAY","remarks":"damaged fidder", "latitude": "23.199204529640394", "longitude":"72.5853494660064"},
+        {"id": 1, "fidderName" :"F3", "substationName": "Anadpura", "transformerLocationName": "UGVCL","existingTcCapacity":"16","proposeTcCapacity":"25","proposeRMUType":"CCV-3 WAY","remarks":"damaged fidder 1",  "latitude": "23.189659037063354", "longitude":"72.61088511158009"}
+    ]
+}
